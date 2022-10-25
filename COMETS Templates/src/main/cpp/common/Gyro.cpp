@@ -9,7 +9,7 @@ void Gyro::TeleopInit(GyroData &gyroData) {
     // gyro.ZeroYaw();
     // gyroData.rawYaw = 0;
     // gyroData.rawPitch = 0;
-    // gyroData.rawRoll = 0;
+    gyroData.rawRoll = 0;
 }
 
 void Gyro::AutonomousInit(GyroData &gyroData) {
