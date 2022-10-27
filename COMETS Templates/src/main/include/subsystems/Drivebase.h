@@ -21,6 +21,8 @@
 #include <string>
 #include <fstream>
 
+#define M_PI 3.14159265358979323846
+
 struct RobotData;
 
 enum DriveMode {

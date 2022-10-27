@@ -1,6 +1,7 @@
 #include "subsystems/Drivebase.h"
 #include "RobotData.h"
 
+
 void Drivebase::RobotInit()
 {
     dbL.ConfigFactoryDefault();
@@ -211,11 +212,11 @@ void Drivebase::teleopControl(const RobotData &robotData, DrivebaseData &driveba
         setPercentOutput(tempLDrive, tempRDrive);
     }
     else if (drivebaseData.driveMode == driveMode_turnInPlace) {
-        turnInPlaceTeleop(-robotData.limelightData.angleOffset, robotData);
+        //turnInPlaceTeleop(-robotData.limelightData.angleOffset, robotData);
     }
     else if (drivebaseData.driveMode == driveMode_vector)
     {
-        setPercentOutput(robotData.jetsonData.leftSkew, robotData.jetsonData.rightSkew);
+        //setPercentOutput(robotData.jetsonData.leftSkew, robotData.jetsonData.rightSkew);
     }
 
 
@@ -233,7 +234,7 @@ void Drivebase::autonControl(const RobotData &robotData, DrivebaseData &drivebas
     if (drivebaseData.driveMode == driveMode_break)
     {
         if (robotData.controlData.shootMode == shootMode_vision) {
-            turnInPlaceTeleop(-robotData.limelightData.angleOffset, robotData);
+            //turnInPlaceTeleop(-robotData.limelightData.angleOffset, robotData);
             // frc::smartDashboard::PutNumber("angleOffsetLimelight", robotData.limelightData.angleOffset);
         } else {
             setVelocity(0, 0);
@@ -553,36 +554,3 @@ void Drivebase::calcTurretEjectAngle(DrivebaseData &drivebaseData) {
     }
 }
 
-/**
- * ---------------------------------------------------------------------------------------------------------------------------------------------------
- * BENCH TEST CODE
- * ---------------------------------------------------------------------------------------------------------------------------------------------------
- **/
-
-void Drivebase::TestPeriodic(const RobotData &robotData, DrivebaseData &drivebaseData){
-    if (robotData.benchTestData.testStage == BenchTestStage::BenchTestStage_Drivebase && (robotData.controlData.manualBenchTest || robotData.controlData.autoBenchTest)){ //checks if we're testing drivebase
-        if (robotData.benchTestData.stage == 0){
-            //move right motors forwards
-            dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, robotData.benchTestData.currentSpeed); //sets the right side speed
-            dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0); //sets the left side speed
-        } else if (robotData.benchTestData.stage == 1){
-            //move right motors backwards
-            dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -robotData.benchTestData.currentSpeed);
-            dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
-        } else if (robotData.benchTestData.stage == 2){
-            //move left motors forwards
-            dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
-            dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, robotData.benchTestData.currentSpeed);
-        } else if (robotData.benchTestData.stage == 3){
-            //move left motors backwards
-            dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
-            dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -robotData.benchTestData.currentSpeed);
-        } else {
-            dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0); //if the drivebase stage isn't within 0 to 3, then the speeds get set to 0
-            dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
-        }
-    } else {
-        dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0); //if not testing drivebase, then speeds get set to 0
-        dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
-    }
-}

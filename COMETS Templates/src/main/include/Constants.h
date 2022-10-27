@@ -51,30 +51,30 @@ static const float
     // hoodAngleIn = 21,
 
     //PRATLAS shooter hood positions
-    hoodabsOut = 0.103,
-    hoodabsIn = 0.962,
-    hoodrevOut = -38,
-    hoodrevIn = 0,
-    hoodAngleOut = 43,
-    hoodAngleIn = 21,
+    hoodabsOut = 0.103f,
+    hoodabsIn = 0.962f,
+    hoodrevOut = -38.0f,
+    hoodrevIn = 0.0f,
+    hoodAngleOut = 43.0f,
+    hoodAngleIn = 21.0f,
 
     // //ATLAS turret positions
-    turretZeroDegrees = 0, 
-    turretFullRotationDegrees = 427,
-    turretMiddleDegrees = 213.77,
-    turretBackwardsDegrees_C = 33.192627,
-    turretBackwardsDegrees_CCW = turretMiddleDegrees + 180,
-    turretFullRotationRev_CCW = 139.85,
-    turretFullRotationRev_C = 0,
+    turretZeroDegrees = 0.0f, 
+    turretFullRotationDegrees = 427.0f,
+    turretMiddleDegrees = 213.77f,
+    turretBackwardsDegrees_C = 33.192627f,
+    turretBackwardsDegrees_CCW = turretMiddleDegrees + 180.0f,
+    turretFullRotationRev_CCW = 139.85f,
+    turretFullRotationRev_C = 0.0f,
     turretMiddleRev = turretFullRotationRev_CCW/2,
-    turretFullRotationAbs_CCW = 0.830242,
-    turretFullRotationAbs_C = 0.143406,
+    turretFullRotationAbs_CCW = 0.830242f,
+    turretFullRotationAbs_C = 0.143406f,
 
-    forwardVelOffset = 175,
+    forwardVelOffset = 175.0f,
     // forwardVelOffsetFar = 220,
-    forwardHoodOffsetFar = 0.5,
-    forwardHoodOffsetClose = 4.5,
-    change = 7.5;
+    forwardHoodOffsetFar = 0.5f,
+    forwardHoodOffsetClose = 4.5f,
+    change = 7.5f;
 
     //FOR PRATLAS
     // turretZeroDegrees = 5, //15
@@ -100,14 +100,14 @@ static const int
 
 //Set shooting hood positions and velocity 
 static const float
-    outerLaunchHood = -35.5,
-    outerLaunchVel = 650,
-    innerLaunchHood = -29,
-    innerLaunchVel = 1710,
-    wallHood = -21.5,
-    wallVel = 1510,
-    fenderHood = -10,
-    fenderVel = 1375;
+    outerLaunchHood = -35.5f,
+    outerLaunchVel = 650.0f,
+    innerLaunchHood = -29.0f,
+    innerLaunchVel = 1710.0f,
+    wallHood = -21.5f,
+    wallVel = 1510.0f,
+    fenderHood = -10.0f,
+    fenderVel = 1375.0f;
 
 // climb
 static const int
@@ -115,7 +115,7 @@ static const int
     climbArmsID = 43;
     
 const float 
-    climbArmsZero = 0.8105;
+    climbArmsZero = 0.8105f;
 
 //limelight:
 static const double
