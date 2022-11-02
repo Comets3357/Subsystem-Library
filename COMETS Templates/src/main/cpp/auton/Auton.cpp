@@ -157,7 +157,7 @@ void Auton::citrus(const RobotData &robotData, ControlData &controlData, Control
 
 
 void Auton::nearFieldOne(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    double sec = robotData.timerData.secSinceEnabled;
+    //double sec = robotData.timerData.secSinceEnabled;
 
     // intake
     controlData.saIntake = false;

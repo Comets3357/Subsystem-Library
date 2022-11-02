@@ -4,10 +4,10 @@
 
 void Drivebase::RobotInit()
 {
-    dbL.ConfigFactoryDefault();
-    dbLF.ConfigFactoryDefault();
-    dbR.ConfigFactoryDefault();
-    dbRF.ConfigFactoryDefault();
+    dbL.RestoreFactoryDefaults();
+    dbLF.RestoreFactoryDefaults();
+    dbR.RestoreFactoryDefaults();
+    dbRF.RestoreFactoryDefaults();
     
     dbRF.Follow(dbR);
     dbLF.Follow(dbL);
@@ -17,10 +17,10 @@ void Drivebase::RobotInit()
     dbR.SetInverted(false);
     dbRF.SetInverted(false);
 
-    dbL.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
-    dbLF.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
-    dbR.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
-    dbRF.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
+    dbL.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    dbLF.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    dbR.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    dbRF.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
     // NEED TO SET CURRENT LIMIT
     /**
@@ -29,48 +29,48 @@ void Drivebase::RobotInit()
   *  Use stator current limits to limit rotor acceleration/heat production
   * Supply Current is the current that passes into the controller from the supply
   *  Use supply current limits to prevent breakers from tripping
-  *
-  *                                                               enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)  */
-    dbL.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 75, 50, 1.0));
-    dbLF.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 75, 50, 1.0));
-    dbR.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 75, 50, 1.0));
-    dbRF.ConfigStatorCurrentLimit(StatorCurrentLimitConfiguration(true, 75, 50, 1.0));
+  **/
+    dbL.SetSmartCurrentLimit(75);
+    dbLF.SetSmartCurrentLimit(75);
+    dbR.SetSmartCurrentLimit(75);
+    dbRF.SetSmartCurrentLimit(75);
+
 
     // PIDs for blue db
-    /* dbL.Config_kF(0, 0.032514);
-    dbL.Config_kP(0, 0.038723);
-    dbL.Config_kD(0, 0);
+    /* dbLPIDController.SetFF(0.032514, 0);
+    dbLPIDController.SetP(0.038723, 0);
+    dbLPIDController.SetD(0, 0);
 
-    dbR.Config_kF(0, 0.032514);
-    dbR.Config_kP(0, 0.038723);
-    dbR.Config_kD(0, 0); */
+    dbLPIDController.SetFF(0.032514, 0);
+    dbLPIDController.SetP(0.038723, 0);
+    dbLPIDController.SetD(0, 0); */
 
     // PIDs for 2022 Calvin University
-    // dbL.Config_kF(0, 0.077626);
-    // dbL.Config_kP(0, 0.10352);
-    // dbL.Config_kD(0, 0);
+    // dbLPIDController.SetFF(0.077626, 0);
+    // dbLPIDController.SetP(0.10352, 0);
+    // dbLPIDController.SetD(0, 0);
 
-    // dbR.Config_kF(0, 0.077626);
-    // dbR.Config_kP(0, 0.10352);
-    // dbR.Config_kD(0, 0);
+    // dbLPIDController.SetFF(0.077626, 0);
+    // dbLPIDController.SetP(0.10352, 0);
+    // dbLPIDController.SetD(0, 0);
 
     // Atlas 03.26.22 Morning
-    // dbL.Config_kF(0, 0.074655);
-    // dbL.Config_kP(0, 0.1079);
-    // dbL.Config_kD(0, 0);
+    // dbLPIDController.SetFF(0.074655, 0);
+    // dbLPIDController.SetP(0.1079, 0);
+    // dbLPIDController.SetD(0, 0);
 
-    // dbR.Config_kF(0, 0.074655);
-    // dbR.Config_kP(0, 0.1079);
-    // dbR.Config_kD(0, 0);
+    // dbLPIDController.SetFF(0.074655, 0);
+    // dbLPIDController.SetP(0.1079, 0);
+    // dbLPIDController.SetD(0, 0);
 
     // Atlas 04.07.22 Final tread center drop but not fresh treads
-    dbL.Config_kF(0, 0.071797);
-    dbL.Config_kP(0, 0.10814);
-    dbL.Config_kD(0, 0);
+    dbLPIDController.SetFF(0.071797, 0);
+    dbLPIDController.SetP(0.10814, 0);
+    dbLPIDController.SetD(0, 0);
 
-    dbR.Config_kF(0, 0.071797);
-    dbR.Config_kP(0, 0.10814);
-    dbR.Config_kD(0, 0);
+    dbRPIDController.SetFF(0.071797, 0);
+    dbRPIDController.SetP(0.10814, 0);
+    dbRPIDController.SetD(0, 0);
 
 
     setPercentOutput(0, 0);
@@ -106,10 +106,10 @@ void Drivebase::RobotPeriodic(const RobotData &robotData, DrivebaseData &driveba
 
     if (frc::DriverStation::IsEnabled())
     {
-        dbL.SetNeutralMode(ctre::phoenix::motorcontrol::Brake);
-        dbLF.SetNeutralMode(ctre::phoenix::motorcontrol::Brake);
-        dbR.SetNeutralMode(ctre::phoenix::motorcontrol::Brake);
-        dbRF.SetNeutralMode(ctre::phoenix::motorcontrol::Brake);
+        dbL.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+        dbLF.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+        dbR.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+        dbRF.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
     }
 
     if (frc::DriverStation::IsTeleop()) {
@@ -125,10 +125,10 @@ void Drivebase::DisabledInit()
 {
     
     setPercentOutput(0, 0);
-    dbL.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
-    dbLF.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
-    dbR.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
-    dbRF.SetNeutralMode(ctre::phoenix::motorcontrol::Coast);
+    dbL.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    dbLF.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    dbR.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+    dbRF.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
     odometryInitialized = false;
 }
 
@@ -136,12 +136,12 @@ void Drivebase::DisabledInit()
 void Drivebase::updateData(const RobotData &robotData, DrivebaseData &drivebaseData)
 {
     // //add back wheel encoders at some point
-    drivebaseData.currentLDBPos = dbL.GetSensorCollection().GetIntegratedSensorPosition();
-    drivebaseData.currentRDBPos = dbR.GetSensorCollection().GetIntegratedSensorPosition();
+    drivebaseData.currentLDBPos = dbLEncoder.GetPosition();
+    drivebaseData.currentRDBPos = dbREncoder.GetPosition();
 
-    drivebaseData.lDriveVel = -dbL.GetSensorCollection().GetIntegratedSensorVelocity() / mpsToTpds;
+    drivebaseData.lDriveVel = -dbLEncoder.GetVelocity() / mpsToTpds;
     // frc::SmartDashboard::PutNumber("lDriveVel", drivebaseData.lDriveVel);
-    drivebaseData.rDriveVel = -dbR.GetSensorCollection().GetIntegratedSensorVelocity() / mpsToTpds;
+    drivebaseData.rDriveVel = -dbLEncoder.GetVelocity() / mpsToTpds;
     // frc::SmartDashboard::PutNumber("rDriveVel", -drivebaseData.rDriveVel);
 
     // WARNING the average calcuation here subtracts for some reason. The values for left and right db velocity act as expected on their own...
@@ -266,10 +266,10 @@ void Drivebase::autonControl(const RobotData &robotData, DrivebaseData &drivebas
         }
         
         frc::Trajectory::State trajectoryState = trajectory.Sample(sampleSec);
-        frc::Pose2d desiredPose = trajectoryState.pose;
+        //frc::Pose2d desiredPose = trajectoryState.pose;
 
-        double trajX = desiredPose.X().to<double>();
-        double trajY = desiredPose.Y().to<double>();
+        //double trajX = desiredPose.X().to<double>();
+        //double trajY = desiredPose.Y().to<double>();
         // frc::SmartDashboard::PutNumber("trajX", trajX);
         // frc::SmartDashboard::PutNumber("trajY", trajY);
 
@@ -293,8 +293,8 @@ void Drivebase::updateOdometry(const RobotData &robotData, DrivebaseData &driveb
     frc::Rotation2d currentRotation{currentRadians};
 
     // NEGATIVE because left motor/encoder should be inverted
-    units::meter_t leftDistance{-dbL.GetSensorCollection().GetIntegratedSensorPosition() / metersToTicks};
-    units::meter_t rightDistance{dbR.GetSensorCollection().GetIntegratedSensorPosition() / metersToTicks};
+    units::meter_t leftDistance{-dbLEncoder.GetPosition() / metersToTicks};
+    units::meter_t rightDistance{dbREncoder.GetPosition() / metersToTicks};
 
     odometry.Update(currentRotation, leftDistance, rightDistance);
 
@@ -356,13 +356,13 @@ void Drivebase::setVelocity(double leftVel, double rightVel)
     double leftTPDS = leftVel * mpsToTpds;
     double rightTPDS = rightVel * mpsToTpds;
 
-    dbL.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, leftTPDS);
-    dbR.Set(ctre::phoenix::motorcontrol::ControlMode::Velocity, rightTPDS);
+    dbLPIDController.SetReference(leftTPDS, rev::CANSparkMax::ControlType::kVelocity);
+    dbRPIDController.SetReference(rightTPDS, rev::CANSparkMax::ControlType::kVelocity);
 }
 
 void Drivebase::zeroEncoders() {
-    dbL.GetSensorCollection().SetIntegratedSensorPosition(0.0);
-    dbR.GetSensorCollection().SetIntegratedSensorPosition(0.0);
+    dbLEncoder.SetPosition(0.0);
+    dbREncoder.SetPosition(0.0);
     // frc::SmartDashboard::PutString("zeroed encoders", "yes");
 }
 
@@ -520,8 +520,8 @@ void Drivebase::turnInPlaceTeleop(double degrees, const RobotData &robotData) {
 
 
 void Drivebase::setPercentOutput(double leftVBus, double rightVBus) {
-    dbL.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, leftVBus);
-    dbR.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, rightVBus);
+    dbL.Set(leftVBus);
+    dbR.Set(rightVBus);
 }
 
 // checks deque contents to see if all values are within the given tolerance (true)

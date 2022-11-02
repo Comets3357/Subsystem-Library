@@ -7,7 +7,7 @@
 #include <frc/Joystick.h>
 #include <frc/DriverStation.h>
 #include <frc/TimedRobot.h>
-#include <ctre/Phoenix.h>
+#include <rev/CANSparkMax.h>
 #include <wpi/uv/Error.h>
 #include <frc/kinematics/DifferentialDriveKinematics.h>
 #include <frc/kinematics/DifferentialDriveOdometry.h>
@@ -20,6 +20,7 @@
 #include <algorithm>
 #include <string>
 #include <fstream>
+#include <deque>
 
 #define M_PI 3.14159265358979323846
 
@@ -130,11 +131,14 @@ private:
     const double metersToTicks = (4.0 / 0.1016) * (1 / (4.0 * M_PI)) * (44.0 / 9.0) * (2048.0);
 
     // forwards are leads
-    ctre::phoenix::motorcontrol::can::TalonFX dbL{leftLeadDeviceID};
-    ctre::phoenix::motorcontrol::can::TalonFX dbLF{leftFollowDeviceID};
+    rev::CANSparkMax dbL{leftLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax dbLF{leftFollowDeviceID, rev::CANSparkMax::MotorType::kBrushless};
+    rev::SparkMaxRelativeEncoder dbLEncoder = dbL.GetEncoder();
+    rev::SparkMaxPIDController dbLPIDController = dbL.GetPIDController();
 
-    ctre::phoenix::motorcontrol::can::TalonFX dbR{rightLeadDeviceID};
-    ctre::phoenix::motorcontrol::can::TalonFX dbRF{rightFollowDeviceID};
-
+    rev::CANSparkMax dbR{rightLeadDeviceID, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax dbRF{rightFollowDeviceID, rev::CANSparkMax::MotorType::kBrushless};
+    rev::SparkMaxRelativeEncoder dbREncoder = dbR.GetEncoder();
+    rev::SparkMaxPIDController dbRPIDController = dbR.GetPIDController();
 
 };
