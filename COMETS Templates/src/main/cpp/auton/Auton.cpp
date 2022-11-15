@@ -14,8 +14,8 @@ void Auton::AutonomousInit(AutonData &autonData)
     fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
 
     autonData.autonRoutineName = autonChooser.GetSelected();
-    fs::path autonDirectory = deployDirectory / "Autos" / autonData.autonRoutineName;
-    // frc::SmartDashboard::PutString("autonDiredctory", autonDirectory.string());
+    fs::path autonDirectory = deployDirectory / "autons" / autonData.autonRoutineName;
+    frc::SmartDashboard::PutString("autonDirectory", autonDirectory.string());
 
     std::ifstream inFile;
     inFile.open(autonDirectory.string());
@@ -54,25 +54,25 @@ void Auton::AutonomousInit(AutonData &autonData)
 }
 
 void Auton::sendAutonSelectionChooser() {
-    autonChooser.AddOption("potato", "potato");
+    // autonChooser.AddOption("potato", "potato");
 
-    autonChooser.AddOption("taxiShootA", "taxiShootA");
-    autonChooser.AddOption("taxiShootAHide", "taxiShootAHide");
-    autonChooser.AddOption("taxiShootB", "taxiShootB");
-    autonChooser.AddOption("taxiShootC", "taxiShootC");
+    // autonChooser.AddOption("taxiShootA", "taxiShootA");
+    // autonChooser.AddOption("taxiShootAHide", "taxiShootAHide");
+    // autonChooser.AddOption("taxiShootB", "taxiShootB");
+    // autonChooser.AddOption("taxiShootC", "taxiShootC");
 
-    autonChooser.AddOption("fourBallB", "fourBallB");
-    autonChooser.AddOption("fourBallC", "fourBallC");
+    // autonChooser.AddOption("fourBallB", "fourBallB");
+    // autonChooser.AddOption("fourBallC", "fourBallC");
     
     autonChooser.AddOption("fiveBallC", "fiveBallC");
-    autonChooser.AddOption("fiveBallCAlt", "fiveBallCAlt");
+    // autonChooser.AddOption("fiveBallCAlt", "fiveBallCAlt");
 
-    autonChooser.AddOption("citrus", "citrus");
-    autonChooser.AddOption("hideBallsA", "hideBallsA");
+    // autonChooser.AddOption("citrus", "citrus");
+    // autonChooser.AddOption("hideBallsA", "hideBallsA");
 
-    autonChooser.AddOption("nearFieldOne", "nearFieldOne");
+    // autonChooser.AddOption("nearFieldOne", "nearFieldOne");
 
-    autonChooser.AddOption("sixBallC", "sixBallC");
+    // autonChooser.AddOption("sixBallC", "sixBallC");
 
     frc::SmartDashboard::PutData("Select Auton:", &autonChooser);
 }
@@ -84,218 +84,224 @@ void Auton::AutonomousPeriodic(const RobotData &robotData, AutonData &autonData,
 
     controlData.mode = mode_teleop_sa;
 
-    if (autonData.autonRoutineName == "potato")
+    // if (autonData.autonRoutineName == "potato")
+    // {
+    //     potato(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "citrus") {
+    //     citrus(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "hideBallsA") {
+    //     citrus(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "nearFieldOne") {
+    //     nearFieldOne(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "taxiShootA") {
+    //     taxiShootA(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "taxiShootAHide") {
+    //     taxiShootA(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "taxiShootB") {
+    //     taxiShoot(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "taxiShootC") {
+    //     taxiShoot(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "fourBallB") {
+    //     fourBallB(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "fourBallC") {
+    //     fourBallC(robotData, controlData, controllerData);
+    // }
+    if (autonData.autonRoutineName == "fiveBallC") 
     {
-        potato(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "citrus") {
-        citrus(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "hideBallsA") {
-        citrus(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "nearFieldOne") {
-        nearFieldOne(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "taxiShootA") {
-        taxiShootA(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "taxiShootAHide") {
-        taxiShootA(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "taxiShootB") {
-        taxiShoot(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "taxiShootC") {
-        taxiShoot(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "fourBallB") {
-        fourBallB(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "fourBallC") {
-        fourBallC(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "fiveBallC") {
         fiveBallC(robotData, controlData, controllerData);
     }
-    else if (autonData.autonRoutineName == "fiveBallCAlt") {
-        fiveBallC(robotData, controlData, controllerData);
-    }
-    else if (autonData.autonRoutineName == "sixBallC") {
-        sixBallC(robotData, controlData, controllerData);
-    }
+    // else if (autonData.autonRoutineName == "fiveBallCAlt") {
+    //     fiveBallC(robotData, controlData, controllerData);
+    // }
+    // else if (autonData.autonRoutineName == "sixBallC") {
+    //     sixBallC(robotData, controlData, controllerData);
+    // }
 }
 
 
-void Auton::potato(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData)
-{
-    controlData.saIntake = false;
-}
+// void Auton::potato(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData)
+// {
+//     controlData.saIntake = false;
+// }
 
 
-void Auton::citrus(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    double sec = robotData.timerData.secSinceEnabled;
+// void Auton::citrus(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
+//     double sec = robotData.timerData.secSinceEnabled;
 
-    // intake
-    if (sec > 0 && sec < 11) {
-        controlData.saIntake = true;
-        controlData.saEjectBalls = false;
-    } else if (sec > 12) {
-        controlData.saIntake = false;
-        controlData.saEjectBalls = true;
-    }
+//     // intake
+//     if (sec > 0 && sec < 11) {
+//         controlData.saIntake = true;
+//         controlData.saEjectBalls = false;
+//     } else if (sec > 12) {
+//         controlData.saIntake = false;
+//         controlData.saEjectBalls = true;
+//     }
 
-    // shooting
-    controlData.shootMode = shootMode_vision;
+//     // shooting
+//     controlData.shootMode = shootMode_vision;
 
-    if (sec > 1.3 && sec < 4) {
-        controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
-    } else {
-        controlData.saFinalShoot = false;
-    }
-}
-
-
-void Auton::nearFieldOne(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    //double sec = robotData.timerData.secSinceEnabled;
-
-    // intake
-    controlData.saIntake = false;
-
-    // shooting
-    controlData.shootMode = shootMode_vision;
-
-    controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
-}
+//     if (sec > 1.3 && sec < 4) {
+//         controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
+//     } else {
+//         controlData.saFinalShoot = false;
+//     }
+// }
 
 
-void Auton::taxiShoot(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    double sec = robotData.timerData.secSinceEnabled;
+// void Auton::nearFieldOne(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
+//     //double sec = robotData.timerData.secSinceEnabled;
 
-    // intake
-    if (sec > 0 && sec < 4) {
-        controlData.saIntake= true;
-    } else {
-        controlData.saIntake = false;
-    }
+//     // intake
+//     controlData.saIntake = false;
 
-    // shooting
-    if (sec > 3 && sec < 7) {
-        controlData.shootMode = shootMode_vision;
-    } else {
-        controlData.shootMode = shootMode_none;
-    }
+//     // shooting
+//     controlData.shootMode = shootMode_vision;
 
-    if (sec > 5 && sec < 7) {
-        controlData.saFinalShoot = true;
-    } else {
-        controlData.saFinalShoot = false;
-    }
-}
-
-void Auton::taxiShootA(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    double sec = robotData.timerData.secSinceEnabled;
-
-    // intake
-    if (sec > 0 && sec < 11) {
-        controlData.saIntake = true;
-        controlData.saEjectBalls = false;
-    } else if (sec > 11) {
-        controlData.saIntake = false;
-        controlData.saEjectBalls = true;
-    }
-
-    // shooting
-    controlData.shootMode = shootMode_vision;
-
-    if (sec > 1.5 && sec < 6) {
-        controlData.saFinalShoot = true;
-    } else {
-        controlData.saFinalShoot = false;
-    }
-}
-
-void Auton::fourBallB(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    double sec = robotData.timerData.secSinceEnabled;
-
-    // intake
-    if (sec < 11) {
-        controlData.saIntake = true;
-    } else {
-        controlData.saIntake = false;
-    }
-
-    // run flywheel and aim
-    controlData.shootMode = shootMode_vision;
+//     controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
+// }
 
 
-    // final shoot
-    if (sec > 3.2 && sec < 4.5) {
-        controlData.saFinalShoot = true;
-    } else if (sec > 13.5 && sec < 15) {
-        controlData.saFinalShoot = true;
-    } else {
-        controlData.saFinalShoot = false;
-    }
-}
+// void Auton::taxiShoot(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
+//     double sec = robotData.timerData.secSinceEnabled;
 
-void Auton::fourBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
-    double sec = robotData.timerData.secSinceEnabled;
+//     // intake
+//     if (sec > 0 && sec < 4) {
+//         controlData.saIntake= true;
+//     } else {
+//         controlData.saIntake = false;
+//     }
 
-    // intake
-    if (sec < 11) {
-        controlData.saIntake = true;
-    } else {
-        controlData.saIntake = false;
-    }
+//     // shooting
+//     if (sec > 3 && sec < 7) {
+//         controlData.shootMode = shootMode_vision;
+//     } else {
+//         controlData.shootMode = shootMode_none;
+//     }
 
-    // run flywheel and aim
-    controlData.shootMode = shootMode_vision;
+//     if (sec > 5 && sec < 7) {
+//         controlData.saFinalShoot = true;
+//     } else {
+//         controlData.saFinalShoot = false;
+//     }
+// }
+
+// void Auton::taxiShootA(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
+//     double sec = robotData.timerData.secSinceEnabled;
+
+//     // intake
+//     if (sec > 0 && sec < 11) {
+//         controlData.saIntake = true;
+//         controlData.saEjectBalls = false;
+//     } else if (sec > 11) {
+//         controlData.saIntake = false;
+//         controlData.saEjectBalls = true;
+//     }
+
+//     // shooting
+//     controlData.shootMode = shootMode_vision;
+
+//     if (sec > 1.5 && sec < 6) {
+//         controlData.saFinalShoot = true;
+//     } else {
+//         controlData.saFinalShoot = false;
+//     }
+// }
+
+// void Auton::fourBallB(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
+//     double sec = robotData.timerData.secSinceEnabled;
+
+//     // intake
+//     if (sec < 11) {
+//         controlData.saIntake = true;
+//     } else {
+//         controlData.saIntake = false;
+//     }
+
+//     // run flywheel and aim
+//     controlData.shootMode = shootMode_vision;
 
 
-    // final shoot
-    if (sec > 3.2 && sec < 4.5) {
-        controlData.saFinalShoot = true;
-    } else if (sec > 13.5 && sec < 15) {
-        controlData.saFinalShoot = true;
-    } else {
-        controlData.saFinalShoot = false;
-    }
-}
+//     // final shoot
+//     if (sec > 3.2 && sec < 4.5) {
+//         controlData.saFinalShoot = true;
+//     } else if (sec > 13.5 && sec < 15) {
+//         controlData.saFinalShoot = true;
+//     } else {
+//         controlData.saFinalShoot = false;
+//     }
+// }
+
+// void Auton::fourBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {
+//     double sec = robotData.timerData.secSinceEnabled;
+
+//     // intake
+//     if (sec < 11) {
+//         controlData.saIntake = true;
+//     } else {
+//         controlData.saIntake = false;
+//     }
+
+//     // run flywheel and aim
+//     controlData.shootMode = shootMode_vision;
+
+
+//     // final shoot
+//     if (sec > 3.2 && sec < 4.5) {
+//         controlData.saFinalShoot = true;
+//     } else if (sec > 13.5 && sec < 15) {
+//         controlData.saFinalShoot = true;
+//     } else {
+//         controlData.saFinalShoot = false;
+//     }
+// }
 
 void Auton::fiveBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData)
 {
     double sec = robotData.timerData.secSinceEnabled;
 
     // intake
-    if (sec > 1 && sec < 5.5) {
+    if (sec > 1 && sec < 5.5)
+    {
         controlData.saIntake = true;
     } else if (sec > 8 && sec < 12.5) {
+
         controlData.saIntake = true;
-    } else {
+    } else 
+    {
         controlData.saIntake = false;
     }
-    // controlData.saIntake = false;
+    controlData.saIntake = false;
 
-    // aim
-    // if (sec > 0 && sec < 14) {
+    //aim-+/
+    if (sec > 0 && sec < 14) 
+    {
         controlData.shootMode = shootMode_vision;
-    // } else {
-    //     controlData.shootMode = shootMode_none;
-    // }
-    
-
-    // final shoot
-    if (sec > 0 && sec < 1.5) {
-        controlData.saFinalShoot = true;
-    } else if (sec > 4 && sec < 8) {
-        controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
-    } else if (sec > 12.5 && sec < 15) {
-        controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
-    } else {
-        controlData.saFinalShoot = false;
+    } else 
+    {
+        controlData.shootMode = shootMode_none;
     }
-
 }
 
-void Auton::sixBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {}
+//     // final shoot
+//     if (sec > 0 && sec < 1.5) {
+//         controlData.saFinalShoot = true;
+//     } else if (sec > 4 && sec < 8) {
+//         controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
+//     } else if (sec > 12.5 && sec < 15) {
+//         controlData.saFinalShoot = robotData.drivebaseData.dbStationaryForShot;
+//     } else {
+//         controlData.saFinalShoot = false;
+//     }
+
+// }
+
+// void Auton::sixBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData) {}

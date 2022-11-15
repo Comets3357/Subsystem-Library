@@ -37,21 +37,21 @@ private:
 
 
     // secondary controls:
-    void potato(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // void potato(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
 
-    void citrus(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // void citrus(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
 
-    void nearFieldOne(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // void nearFieldOne(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
 
-    // exit tarmac, collect 1, turn, shoot 2:
-    void taxiShoot(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
-    void taxiShootA(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // // exit tarmac, collect 1, turn, shoot 2:
+    // void taxiShoot(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // void taxiShootA(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
 
-    // four ball autons (taxiShoot, neighboring ball, termincal shoot):
-    void fourBallB(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
-    void fourBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // // four ball autons (taxiShoot, neighboring ball, termincal shoot):
+    // void fourBallB(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // void fourBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
     
     void fiveBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
 
-    void sixBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
+    // void sixBallC(const RobotData &robotData, ControlData &controlData, ControllerData &controllerData);
 };

@@ -12,6 +12,16 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+
+  driveBase.RobotInit();
+  gyro.RobotInit();
+  timer.RobotInit(robotData.timerData);
+  auton.RobotInit(robotData.autonData);
+
+
+
+
 }
 
 /**
@@ -22,7 +32,9 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  driveBase.RobotPeriodic(robotData, robotData.drivebaseData, robotData.autonData);
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -41,6 +53,10 @@ void Robot::AutonomousInit() {
   //     kAutoNameDefault);
   fmt::print("Auto selected: {}\n", m_autoSelected);
 
+  auton.AutonomousInit(robotData.autonData);
+  timer.RobotInit(robotData.timerData);
+  gyro.AutonomousInit(robotData.gyroData);
+
   if (m_autoSelected == kAutoNameCustom) {
     // Custom Auto goes here
   } else {
@@ -54,6 +70,8 @@ void Robot::AutonomousPeriodic() {
   } else {
     // Default Auto goes here
   }
+
+  auton.AutonomousPeriodic(robotData, robotData.autonData, robotData.controlData, robotData.controllerData);
 }
 
 void Robot::TeleopInit() {}
