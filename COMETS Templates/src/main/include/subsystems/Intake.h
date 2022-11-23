@@ -31,6 +31,8 @@ public:
 
 private:
 
+    double AbsoluteToRelative(double currentAbsolutePosition);
+
     // Intake Roller Initialization
     rev::CANSparkMax intakeRollers = rev::CANSparkMax(intakeRollerID, rev::CANSparkMax::MotorType::kBrushless);
     rev::SparkMaxRelativeEncoder intakeRollersRelativeEncoder = intakeRollers.GetEncoder(); // Relative Encoder
@@ -44,8 +46,8 @@ private:
 
     // Encoder Min and Max Values
     double intakePivotRelativeMaxPosition = 13;
-    double intakePivotRelativeMinPosition = ;
+    double intakePivotRelativeMinPosition = 0;
 
-    double absoluteEncoderMaxValue;
-    double absoluteEncoderMinValue;
+    double intakePivotAbsoluteMaxPosition = 0.93418697534;
+    double intakePivotAbosluteMinPosition = 0.14207;
 };

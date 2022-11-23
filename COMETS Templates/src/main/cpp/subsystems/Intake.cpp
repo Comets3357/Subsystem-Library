@@ -22,4 +22,19 @@ void Intake::RobotInit()
     intakePivot.SetSmartCurrentLimit(20);
     intakePivot.BurnFlash();
 
+    // Callibrating Relative Based On Absolute Position
+    intakePivotRelativeEncoder.SetPosition(AbsoluteToRelative(intakePivotAbsoluteEncoder.GetOutput()));
+
+}
+
+void Intake::RobotPeriodic(const RobotData &robotData, IntakeData &intakeData)
+{
+    
+}
+
+double Intake::AbsoluteToRelative(double currentAbsolutePosition) 
+{
+    double slope = (intakePivotRelativeMaxPosition - intakePivotRelativeMinPosition) / (intakePivotAbsoluteMaxPosition - intakePivotAbosluteMinPosition);
+    double b = intakePivotRelativeMinPosition - (slope * intakePivotAbosluteMinPosition);
+    return ((slope * currentAbsolutePosition) + b);
 }
