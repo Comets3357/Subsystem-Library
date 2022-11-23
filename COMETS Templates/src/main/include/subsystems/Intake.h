@@ -42,4 +42,10 @@ private:
     frc::DigitalInput m_input{intakeAbsoluteEncoderPort};
     frc::DutyCycle intakePivotAbsoluteEncoder = frc::DutyCycle{m_input}; // Absolute Encoder
 
+    // Encoder Min and Max Values
+    double intakePivotRelativeMaxPosition = 13;
+    double intakePivotRelativeMinPosition = ;
+
+    double absoluteEncoderMaxValue;
+    double absoluteEncoderMinValue;
 };
