@@ -14,7 +14,7 @@ void Auton::AutonomousInit(AutonData &autonData)
     fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
 
     autonData.autonRoutineName = autonChooser.GetSelected();
-    fs::path autonDirectory = deployDirectory / "autons" / autonData.autonRoutineName;
+    fs::path autonDirectory = deployDirectory / "Autos" / autonData.autonRoutineName;
     frc::SmartDashboard::PutString("autonDirectory", autonDirectory.string());
 
     std::ifstream inFile;
@@ -64,7 +64,7 @@ void Auton::sendAutonSelectionChooser() {
     // autonChooser.AddOption("fourBallB", "fourBallB");
     // autonChooser.AddOption("fourBallC", "fourBallC");
     
-    autonChooser.AddOption("fiveBallC", "fiveBallC");
+    autonChooser.AddOption("5Ball", "5Ball");
     // autonChooser.AddOption("fiveBallCAlt", "fiveBallCAlt");
 
     // autonChooser.AddOption("citrus", "citrus");
@@ -115,7 +115,7 @@ void Auton::AutonomousPeriodic(const RobotData &robotData, AutonData &autonData,
     // else if (autonData.autonRoutineName == "fourBallC") {
     //     fourBallC(robotData, controlData, controllerData);
     // }
-    if (autonData.autonRoutineName == "fiveBallC") 
+    if (autonData.autonRoutineName == "5Ball") 
     {
         fiveBallC(robotData, controlData, controllerData);
     }

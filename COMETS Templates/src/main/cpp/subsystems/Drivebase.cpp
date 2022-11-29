@@ -435,7 +435,7 @@ void Drivebase::getNextAutonStep(const RobotData &robotData, DrivebaseData &driv
 
             fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
 
-            fs::path pathDirectory = deployDirectory / "Paths" / (trajectoryName + ".wpilib.json");
+            fs::path pathDirectory = deployDirectory / "output" / (trajectoryName + ".wpilib.json");
 
             // frc::SmartDashboard::PutString("pathDirectory", pathDirectory.string());
 
