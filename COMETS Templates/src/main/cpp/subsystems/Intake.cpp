@@ -29,7 +29,10 @@ void Intake::RobotInit()
 
 void Intake::RobotPeriodic(const RobotData &robotData, IntakeData &intakeData)
 {
-    
+    if (robotData.controllerData.sRTrigger)
+    {
+        intakePivot.Set(rev::CANSparkMax::)
+    }
 }
 
 double Intake::AbsoluteToRelative(double currentAbsolutePosition) 
