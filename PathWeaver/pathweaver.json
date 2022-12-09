@@ -1,9 +1,9 @@
 {
   "lengthUnit": "Meter",
   "exportUnit": "Always Meters",
-  "maxVelocity": 10.0,
+  "maxVelocity": 20.0,
   "maxAcceleration": 60.0,
-  "trackWidth": 2.0,
+  "trackWidth": 3.7217,
   "gameName": "Rapid React",
   "outputDir": "../COMETS Templates/src/main/deploy"
 }

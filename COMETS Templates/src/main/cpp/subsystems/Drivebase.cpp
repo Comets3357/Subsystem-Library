@@ -66,12 +66,20 @@ void Drivebase::RobotInit()
     // dbR.Config_kD(0, 0);
 
     // Atlas 04.07.22 Final tread center drop but not fresh treads
-    dbLPIDController.SetFF(0.071797);
-    dbLPIDController.SetP(0.10814);
+    // dbLPIDController.SetFF(0.071797);
+    // dbLPIDController.SetP(0.10814);
+    // dbLPIDController.SetD(0);
+
+    // dbRPIDController.SetFF(0.071797);
+    // dbRPIDController.SetP(0.10814);
+    // dbRPIDController.SetD(0);
+
+    dbLPIDController.SetP(0.3926);
+    dbLPIDController.SetFF(0.2688);
     dbLPIDController.SetD(0);
 
-    dbRPIDController.SetFF(0.071797);
-    dbRPIDController.SetP(0.10814);
+    dbRPIDController.SetP(0.3926);
+    dbRPIDController.SetFF(0.2688);
     dbRPIDController.SetD(0);
 
     setPercentOutput(0, 0);
@@ -267,11 +275,11 @@ void Drivebase::autonControl(const RobotData &robotData, DrivebaseData &drivebas
     }
     else if (drivebaseData.driveMode == driveMode_trajectory)
     {
-        // frc::SmartDashboard::PutNumber("secSinceEnabled", robotData.timerData.secSinceEnabled);
+        frc::SmartDashboard::PutNumber("secSinceEnabled", robotData.timerData.secSinceEnabled);
 
         units::second_t sampleSec{robotData.timerData.secSinceEnabled - trajectorySecOffset};
 
-        // frc::SmartDashboard::PutNumber("sampleSec", sampleSec.to<double>());
+        frc::SmartDashboard::PutNumber("sampleSec", sampleSec.to<double>());
 
         double totalTime = trajectory.TotalTime().to<double>();
         // frc::SmartDashboard::PutNumber("trajTotalTime", totalTime);
@@ -286,8 +294,8 @@ void Drivebase::autonControl(const RobotData &robotData, DrivebaseData &drivebas
 
         double trajX = desiredPose.X().to<double>();
         double trajY = desiredPose.Y().to<double>();
-        // frc::SmartDashboard::PutNumber("trajX", trajX);
-        // frc::SmartDashboard::PutNumber("trajY", trajY);
+        frc::SmartDashboard::PutNumber("trajX", trajX);
+        frc::SmartDashboard::PutNumber("trajY", trajY);
 
         frc::ChassisSpeeds chassisSpeeds = ramseteController.Calculate(odometry.GetPose(), trajectoryState);
 
@@ -295,8 +303,8 @@ void Drivebase::autonControl(const RobotData &robotData, DrivebaseData &drivebas
 
         double leftWheelSpeed = wheelSpeeds.left.to<double>();
         double rightWheelSpeed = wheelSpeeds.right.to<double>();
-        // frc::SmartDashboard::PutNumber("leftWheelSpeed", leftWheelSpeed);
-        // frc::SmartDashboard::PutNumber("rightWheelSpeed", rightWheelSpeed);
+        frc::SmartDashboard::PutNumber("leftWheelSpeed", leftWheelSpeed);
+        frc::SmartDashboard::PutNumber("rightWheelSpeed", rightWheelSpeed);
 
         setVelocity(leftWheelSpeed, rightWheelSpeed);
     }
@@ -411,6 +419,7 @@ void Drivebase::getNextAutonStep(const RobotData &robotData, DrivebaseData &driv
         // frc::SmartDashboard::PutString("robotData.autonData.pathGroup[robotData.autonData.autonStep", autonData.pathGroup[autonData.autonStep]);
 
         std::string trajectoryName = autonData.pathGroup.at(autonData.autonStep);
+        frc::SmartDashboard::PutString("K", trajectoryName);
 
         // frc::SmartDashboard::PutString("trajectoryName", trajectoryName);
 
@@ -435,12 +444,12 @@ void Drivebase::getNextAutonStep(const RobotData &robotData, DrivebaseData &driv
 
             fs::path deployDirectory = frc::filesystem::GetDeployDirectory();
 
-            fs::path pathDirectory = deployDirectory / "output" / (trajectoryName + ".wpilib.json");
+            fs::path pathDirectory = deployDirectory / "Paths" / (trajectoryName + ".wpilib.json");
 
-            // frc::SmartDashboard::PutString("pathDirectory", pathDirectory.string());
+            frc::SmartDashboard::PutString("pathDirectory", pathDirectory.string());
 
             trajectory = frc::TrajectoryUtil::FromPathweaverJson(pathDirectory.string());
-            // frc::SmartDashboard::PutNumber("original seconds since enabled", robotData.timerData.secSinceEnabled);
+            frc::SmartDashboard::PutNumber("original seconds since enabled", robotData.timerData.secSinceEnabled);
             trajectorySecOffset = robotData.timerData.secSinceEnabled;
 
             
@@ -514,8 +523,8 @@ void Drivebase::turnInPlaceAuton(double degrees, const RobotData &robotData, Dri
     }
     
 
-    // frc::SmartDashboard::PutNumber("leftOutput", leftOutput);
-    // frc::SmartDashboard::PutNumber("rightOutput", rightOutput);
+    frc::SmartDashboard::PutNumber("leftOutput", leftOutput);
+    frc::SmartDashboard::PutNumber("rightOutput", rightOutput);
     
     setPercentOutput(leftOutput * (-directionFactor), rightOutput * (directionFactor));
 }

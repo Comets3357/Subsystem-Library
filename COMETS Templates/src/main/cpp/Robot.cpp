@@ -58,8 +58,10 @@ void Robot::AutonomousInit() {
   fmt::print("Auto selected: {}\n", m_autoSelected);
 
   auton.AutonomousInit(robotData.autonData);
+  driveBase.AutonomousInit(robotData, robotData.drivebaseData, robotData.autonData);
   timer.RobotInit(robotData.timerData);
   gyro.AutonomousInit(robotData.gyroData);
+  timer.EnabledInit(robotData.timerData);
 
   if (m_autoSelected == kAutoNameCustom) {
     // Custom Auto goes here
@@ -78,6 +80,7 @@ void Robot::AutonomousPeriodic() {
   timer.EnabledPeriodic(robotData.timerData);
   gyro.RobotPeriodic(robotData.gyroData);
   auton.AutonomousPeriodic(robotData, robotData.autonData, robotData.controlData, robotData.controllerData);
+  driveBase.RobotPeriodic(robotData, robotData.drivebaseData, robotData.autonData);
   
 }
 

@@ -30,4 +30,7 @@ void Timer::DisabledInit(TimerData &timerData)
 
 void Timer::DisabledPeriodic(TimerData &timerData) {
     timerData.secSinceInit = initTimer.Get().to<double>();
+    timerData.secSinceEnabled = timer.Get().to<double>();
+
+    frc::SmartDashboard::PutNumber("TIUNASDIJFKSJDF", timerData.secSinceInit);
 }

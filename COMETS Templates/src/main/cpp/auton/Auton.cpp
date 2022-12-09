@@ -23,11 +23,11 @@ void Auton::AutonomousInit(AutonData &autonData)
     autonData.pathGroup.clear();
 
     if (inFile.fail()) {
-    //    frc::SmartDashboard::PutString("fail", "failed");
+    frc::SmartDashboard::PutString("fail", "failed");
     } else {
         std::string str;
         while (getline(inFile, str)) {
-            // frc::SmartDashboard::PutString("str", str);
+            frc::SmartDashboard::PutString("str", str);
             autonData.pathGroup.push_back(str);
         }
     }
@@ -36,8 +36,8 @@ void Auton::AutonomousInit(AutonData &autonData)
     for (size_t i = 0; i < autonData.pathGroup.size(); i++) {
         std::string correctPathName = autonData.pathGroup[i];
 
-        // frc::SmartDashboard::PutBoolean("int bool" + std::to_string(i), correctPathName[correctPathName.length() - 1] == 13);
-        // frc::SmartDashboard::PutNumber(std::to_string(i) + "int", correctPathName[correctPathName.length() - 1]);
+        frc::SmartDashboard::PutBoolean("int bool" + std::to_string(i), correctPathName[correctPathName.length() - 1] == 13);
+        frc::SmartDashboard::PutNumber(std::to_string(i) + "int", correctPathName[correctPathName.length() - 1]);
 
         // if the last char in the string is a newline, delete it for proper auton selection processing
         if (int(correctPathName[correctPathName.length() - 1]) == 13) {
@@ -46,10 +46,10 @@ void Auton::AutonomousInit(AutonData &autonData)
         
         autonData.pathGroup[i] = correctPathName;
 
-        // frc::SmartDashboard::PutString(std::to_string(i), autonData.pathGroup[i]);
+        frc::SmartDashboard::PutString(std::to_string(i), autonData.pathGroup[i]);
         
         
-        // frc::SmartDashboard::PutString(std::to_string(i), autonData.pathGroup[i]);        
+        frc::SmartDashboard::PutString(std::to_string(i), autonData.pathGroup[i]);        
     }
 }
 
